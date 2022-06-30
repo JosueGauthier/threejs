@@ -54,7 +54,7 @@ const renderer = new WebGLRenderer({
   antialias: true,
   alpha: true,
 });
-renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setSize(window.innerWidth, document.body.scrollHeight);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setClearColor(0x000000, 0)
 document.body.appendChild(renderer.domElement);
@@ -82,13 +82,10 @@ function tick() {
 
   const ratioW = (mouseX / window.innerWidth - 0.5) * 2
   const ratioH = (mouseY / window.innerHeight - 0.5) * 2
-  group.rotation.y = ratioW * 3.14 * 0.1 + ratioH * 3.14 * 0.1;
+  group.rotation.y = ratioH * 3.14 * 0.1;
+  group.rotation.x = ratioW * 3.14 * 0.1;
 
   //! on ne sait pas combien de fois par seconde est appellé le tick on place donc une clock
-  // group.rotateY(0.01)
-  // camera.position.x += 0.001;
-  // camera.position.y += 0.001;
-  // camera.lookAt(0,0,0);
 
 }
 
