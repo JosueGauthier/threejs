@@ -1,5 +1,6 @@
-import { AxesHelper, BufferGeometry, Clock, DoubleSide, Float32BufferAttribute, Group, MathUtils, PerspectiveCamera, Points, PointsMaterial, Scene, TextureLoader, WebGLRenderer } from 'three';
+import { BufferGeometry, Clock, Float32BufferAttribute, Group, MathUtils, PerspectiveCamera, Points, PointsMaterial, Scene, TextureLoader, WebGLRenderer } from 'three';
 import './style.css';
+import './assets/css/styles.css'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 
@@ -9,7 +10,7 @@ const textureLoader = new TextureLoader();
 const circleTexture = textureLoader.load("bulle.png")
 const scene = new Scene();
 const count = 100;
-const distanceMax = 4;
+const distanceMax = 20;
 
 const points = new Float32Array(count * 3);
 const colors = new Float32Array(count * 3);
@@ -20,32 +21,30 @@ for (let i = 0; i < points.length; i++) {
   sizes[i] = Math.random();
 }
 
-const a = new Float32BufferAttribute(sizes)
-
-console.log(a);
-
 const geometry = new BufferGeometry();
 geometry.setAttribute('position', new Float32BufferAttribute(points, 3));
 geometry.setAttribute('color', new Float32BufferAttribute(colors, 3));
 
 const pointMaterial = new PointsMaterial({
-  size : Math.random(),
+  size: 1,
   vertexColors: true,
   map: circleTexture,
   transparent: true,
   alphaTest: 0.10,
   depthWrite: false,
   depthTest: true
-  
+
 });
 
-scene.add(new AxesHelper());
+/* scene.add(new AxesHelper()); */
 const camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.01, 1000);
 camera.position.z = 2;
 camera.position.y = 0.5;
 camera.position.x = 0.5;
 scene.add(camera);
 const pointsObject = new Points(geometry, pointMaterial)
+
+console.log(geometry);
 
 const group = new Group();
 group.add(pointsObject);
@@ -85,7 +84,7 @@ function tick() {
   const ratioH = (mouseY / window.innerHeight - 0.5) * 2
   group.rotation.y = ratioW * 3.14 * 0.1 + ratioH * 3.14 * 0.1;
 
-  //! on ne sait pas combien de fosi par seconde est appellé le tick on place donc une clock
+  //! on ne sait pas combien de fois par seconde est appellé le tick on place donc une clock
   // group.rotateY(0.01)
   // camera.position.x += 0.001;
   // camera.position.y += 0.001;
@@ -103,5 +102,6 @@ window.addEventListener('resize', () => {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 });
 
-
+var container = document.getElementById('three_js');
+container.appendChild(renderer.domElement);
 
