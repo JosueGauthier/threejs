@@ -4,10 +4,8 @@ import './assets/css/styles.css'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 
-
-
 const textureLoader = new TextureLoader();
-const circleTexture = textureLoader.load("bulle.png")
+const circleTexture = textureLoader.load("assets/bulle.72f9583e.png")
 const scene = new Scene();
 const count = 100;
 const distanceMax = 20;
@@ -82,13 +80,18 @@ function tick() {
 
   const ratioW = (mouseX / window.innerWidth - 0.5) * 2
   const ratioH = (mouseY / window.innerHeight - 0.5) * 2
-  group.rotation.y = ratioH * 3.14 * 0.1;
-  group.rotation.x = ratioW * 3.14 * 0.1;
+  group.rotation.y = ratioH * 0.1 + ratioW * 0.1;
 
   //! on ne sait pas combien de fois par seconde est appellé le tick on place donc une clock
 
 }
 
+/* function changeBackground(color) {
+  document.body.style.background = color;
+}
+
+window.addEventListener("load",function() { changeBackground('red') });
+ */
 
 tick();
 
