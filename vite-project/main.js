@@ -1,5 +1,4 @@
 import { BufferGeometry, Clock, Float32BufferAttribute, Group, MathUtils, PerspectiveCamera, Points, PointsMaterial, Scene, TextureLoader, WebGLRenderer } from 'three';
-import './style.css';
 import './assets/css/styles.css'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
